@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Traineeship" default="all" basedir=".">
+	<!--General-->
+	<property name="src.dir" value="src" />
+	<property name="src.test.dir" value="test" />
+	<property name="lib.dir" value="lib" />
+
+	<!--Build-->
+	<property name="build.dir" value="build" />
+	<property name="build.classes.dir" value="${build.dir}/classes" />
+	<property name="build.test.classes.dir" value="${build.dir}/testClasses" />
+	<property name="jar.file" value="${build.dir}/Traineeship.jar" />
+
+	<!--Locations-->
+	<property name="checkstyle.path" value="${lib.dir}/checkstyle-6.13-all.jar" />
+	<property name="pmd.path" value="${lib.dir}/pmd-java-5.1.3.jar" />
+	<property name="findbugs.path" value="${lib.dir}/findbugs-3.0.1" />
+
+	<!--Report-->
+	<property name="report.dir" value="${build.dir}/report" />
+	<property name="report.cobertura.dir" value="${report.dir}/cobertura" />
+	<property name="report.junit.dir" value="${report.dir}/junit" />
+	<property name="report.checkstyle.dir" value="${report.dir}/checkstyle" />
+	<property name="report.pmd.dir" value="${report.dir}/pmd" />
+	<property name="report.findbugs.dir" value="${report.dir}/findbugs" />
+
+	<!--Temp-->
+	<property name="temp.dir" value="${build.dir}/temp" />
+
+
+	<!--Config-->
+	<property name="cobertura.instrumented.dir" value="instrumented" />
+	<property name="cobertura.ser.file" value="cobertura.ser" />
+	<property name="checkstyle.config" value="${lib.dir}/sun_check.xml" />
+	<property name="checkstyle.xsl" value="${lib.dir}/checkstyle.xsl" />
+
+
+	<path id="all.classpath">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<pathelement location="${build.classes.dir}" />
+		<pathelement location="${build.test.classes.dir}" />
+	</path>
+
+	<taskdef classpathref="all.classpath" resource="tasks.properties" />
+
+	<!--Creates required directories-->
+	<target name="mkdirs" depends="clean">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.classes.dir}" />
+		<mkdir dir="${build.test.classes.dir}" />
+		<mkdir dir="${report.dir}" />
+	</target>
+
+	<!--Cleans directories-->
+	<target name="clean">
+		<delete dir="${build.dir}" />
+	</target>
+
+	<!--Compiles source's classes-->
+	<target name="compile">
+		<mkdir dir="${build.classes.dir}" />
+		<javac debug="true" srcdir="${src.dir}" destdir="${build.classes.dir}" classpathref="all.classpath" includeantruntime="false" />
+	</target>
+
+	<!--Compiles source test's classes-->
+	<target name="testcompile" depends="compile">
+		<mkdir dir="${build.test.classes.dir}" />
+		<javac srcdir="${src.test.dir}" destdir="${build.test.classes.dir}" classpathref="all.classpath" includeantruntime="false" />
+	</target>
+
+	<!--Builds project's jar-file-->
+	<target name="jar" depends="compile">
+		<copy todir="${build.classes.dir}">
+			<fileset file="resources/log4j.xml" />
+		</copy>
+		<jar destfile="${jar.file}" basedir="${build.classes.dir}" />
+	</target>
+
+	<!--Checks code style with Checkstyle, PMD and Findbugs-->
+	<target name="checkstyle" depends="compile">
+		<!-- Checkstyle -->
+		<mkdir dir="${report.checkstyle.dir}" />
+		<taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties" classpath="${checkstyle.path}" />
+		<checkstyle config="${checkstyle.config}" failureProperty="checkstyle.failure" failOnViolation="false">
+			<formatter type="xml" tofile="${report.checkstyle.dir}/checkstyle_report.xml" />
+			<fileset dir="${src.dir}" includes="**/*.java" />
+		</checkstyle>
+		<xslt in="${report.checkstyle.dir}\checkstyle_report.xml" out="${report.checkstyle.dir}\checkstyle_report.html" style="${checkstyle.xsl}\" />
+		<delete file="${report.checkstyle.dir}\checkstyle_report.xml" />
+
+		<!-- PMD -->
+		<taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask">
+			<classpath refid="all.classpath" />
+		</taskdef>
+		<mkdir dir="${report.pmd.dir}" />
+		<pmd rulesetfiles="rulesets/internal/all-java.xml" shortFilenames="true">
+			<formatter type="html" toFile="${report.pmd.dir}/pmd_report.html" toConsole="true" />
+			<fileset dir="${src.dir}">
+				<include name="**/*.java" />
+			</fileset>
+		</pmd>
+
+		<!-- Findbugs -->
+		<taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask">
+			<classpath refid="all.classpath" />
+		</taskdef>
+		<mkdir dir="${report.findbugs.dir}" />
+		<findbugs home="${findbugs.path}" output="html" outputFile="${report.findbugs.dir}/report_findbug.html">
+			<sourcePath path="${src.dir}" />
+			<fileset dir="${build.classes.dir}">
+				<include name="**/*.class" />
+			</fileset>
+		</findbugs>
+	</target>
+
+	<!--Tests project-->
+	<target name="test" depends="testcompile">
+		<mkdir dir="${temp.dir}" />
+		<junit printsummary="yes" haltonfailure="no">
+			<classpath refid="all.classpath" />
+			<formatter type="xml" />
+			<batchtest todir="${temp.dir}">
+				<fileset dir="${src.test.dir}">
+					<include name="**/*.java" />
+					<exclude name="**/TestSuiteCreator.*" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<!--Creates report about testing-->
+	<target name="testreport" depends="testcompile">
+		<delete dir="${cobertura.instrumented.dir}" />
+		<delete file="${cobertura.ser.file}" />
+		<mkdir dir="${report.cobertura.dir}" />
+		<mkdir dir="${temp.dir}" />
+		<mkdir dir="${cobertura.instrumented.dir}" />
+		<cobertura-instrument todir="${cobertura.instrumented.dir}" datafile="${cobertura.ser.file}">
+			<ignore regex="org.apache.log4j.*" />
+			<fileset dir="${build.classes.dir}">
+				<include name="**/*.class" />
+			</fileset>
+		</cobertura-instrument>
+
+		<junit fork="yes" printsummary="on">
+			<classpath location="${cobertura.instrumented.dir}" />
+			<classpath location="${build.classes.dir}" />
+			<classpath refid="all.classpath" />
+			<sysproperty key="net.sourceforge.cobertura.datafile" file="${cobertura.ser.file}" />
+			<batchtest todir="${temp.dir}">
+				<formatter type="xml" />
+				<fileset dir="${src.test.dir}">
+					<include name="**/*.java" />
+					<exclude name="**/TestSuiteCreator.*" />
+				</fileset>
+			</batchtest>
+		</junit>
+		<junitreport todir="${temp.dir}">
+			<fileset dir="${temp.dir}">
+				<include name="TEST-*.xml" />
+			</fileset>
+			<report format="frames" todir="${report.junit.dir}" />
+		</junitreport>
+
+		<delete dir="${cobertura.instrumented.dir}" />
+	</target>
+
+	<!--Calculates the percentage of code accessed by tests-->
+	<target name="cobertura" depends="testreport">
+		<cobertura-report format="html" datafile="${cobertura.ser.file}" destdir="${report.cobertura.dir}">
+			<fileset dir="${src.dir}">
+				<include name="**/*.java" />
+			</fileset>
+		</cobertura-report>
+		<delete file="${cobertura.ser.file}" />
+	</target>
+
+	<!--Runs all targets-->
+	<target name="all" depends="compile, testcompile, test, checkstyle, cobertura, jar" description="Compile classes">
+		<delete dir="${temp.dir}" />
+	</target>
+
+</project>
+
