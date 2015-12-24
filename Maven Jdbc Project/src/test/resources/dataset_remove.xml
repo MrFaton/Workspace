@@ -1,0 +1,4 @@
+<dataset>
+    <role id_role="1" name="admin"/>
+    <user id_user="1" login="admin" password="admin" email="admin@nixsolutions.com" name="Admin" surname="Adminovich" birthday="1980-04-15" role_id="1"/>
+</dataset>

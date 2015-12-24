@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <Properties>
+        <Property name="log-path">/home/NIX/angelin/Documents/workspace-sts/logs/</Property>
+    </Properties>
+    <appenders>
+        <RollingFile name="File" fileName="${log-path}/log-info.log"
+                     filePattern="${log-path}/log-info-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <pattern>[%p] %d{yyyy-MM-dd HH:mm:ss} %c: %M() %L - %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+        <console name="Console" target="SYSTEM_OUT">
+            <PatternLayout>
+                <pattern>[%p] %d{yyyy-MM-dd HH:mm:ss} %c: %M() %L - %m%n</pattern>
+            </PatternLayout>
+        </console>
+    </appenders>
+    <loggers>
+        <logger name="FileLog" level="trace">
+            <appenderref ref="File">
+            </appenderref></logger>
+        <root level="trace">
+            <appenderref ref="File"></appenderref>
+            <appenderref ref="Console"></appenderref>
+        </root>
+    </loggers>
+</configuration>
