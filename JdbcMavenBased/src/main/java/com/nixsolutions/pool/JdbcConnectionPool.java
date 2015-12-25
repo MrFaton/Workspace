@@ -14,7 +14,7 @@ import com.jolbox.bonecp.BoneCPConfig;
 public class JdbcConnectionPool {
     private static final Logger logger = LoggerFactory
             .getLogger(JdbcConnectionPool.class);
-    private static final String FILE_NAME = "resources/db.properties";
+    private static final String FILE_NAME = "db.properties";
     private static JdbcConnectionPool jdbcPool = null;
     private static BoneCP pool = null;
 

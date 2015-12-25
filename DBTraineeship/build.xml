@@ -4,7 +4,7 @@
 	<property name="src.dir" value="src" />
 	<property name="src.test.dir" value="test" />
 	<property name="lib.dir" value="lib" />
-	<property name="resources.dir" value="resources" />
+	<property name="common.resources.dir" value="resources" />
 
 	<!--Build-->
 	<property name="build.dir" value="build" />
@@ -42,8 +42,11 @@
 		</fileset>
 		<pathelement location="${build.classes.dir}" />
 		<pathelement location="${build.test.classes.dir}" />
-		<pathelement location="${resources.dir}" />
+		<pathelement location="${common.resources.dir}" />
+		<pathelement location="${src.test.dir}" />
 	</path>
+
+
 
 	<taskdef classpathref="all.classpath" resource="tasks.properties" />
 
@@ -75,7 +78,10 @@
 	<!--Builds project's jar-file-->
 	<target name="jar" depends="compile">
 		<copy todir="${build.classes.dir}">
-			<fileset dir="${resources.dir}" />
+			<fileset dir="${common.resources.dir}" />
+		</copy>
+		<copy todir="${build.classes.dir}/resources">
+			<fileset dir="${src.dir}/resources" />
 		</copy>
 		<jar destfile="${jar.file}" basedir="${build.classes.dir}" />
 	</target>

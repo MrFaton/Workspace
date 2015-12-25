@@ -20,9 +20,9 @@ import com.nixsolutions.pool.JdbcConnectionPool;
 
 public class DbTestHelper {
     protected static final String SCHEMA = "TRAINEESHIP_DB";
-    protected static final String SQL_CREATE_CHEMA = "test/resources/sql/Create scheme.sql";
-    protected static final String SQL_CREATE_TABLE_ROLE = "test/resources/sql/Create table ROLE.sql";
-    protected static final String SQL_CREATE_TABLE_USER = "test/resources/sql/Create table USER.sql";
+    protected static final String SQL_CREATE_CHEMA = "src/test/resources/sql/Create scheme.sql";
+    protected static final String SQL_CREATE_TABLE_ROLE = "src/test/resources/sql/Create table ROLE.sql";
+    protected static final String SQL_CREATE_TABLE_USER = "src/test/resources/sql/Create table USER.sql";
     private final JdbcConnectionPool connectionPool;
 
     public DbTestHelper() {

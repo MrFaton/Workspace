@@ -1,0 +1,37 @@
+25.12.2015 17:36:24 TRACE [main:] com.nixsolutions.pool.JdbcConnectionPool -> getInstance (30): build connection pool
+25.12.2015 17:36:24 TRACE [main:] com.nixsolutions.pool.JdbcConnectionPool -> loadProperties (89): load file with DB properties
+25.12.2015 17:36:24 TRACE [main:] com.nixsolutions.dao.impl.JdbcRoleDao -> update (61): update null
+25.12.2015 17:36:24 TRACE [main:] com.nixsolutions.dao.impl.JdbcRoleDao -> create (34): create null
+25.12.2015 17:36:24 TRACE [main:] com.nixsolutions.dao.impl.JdbcRoleDao -> findByName (118): searching for role by name = role3
+25.12.2015 17:36:24 TRACE [main:] com.nixsolutions.dao.impl.JdbcRoleDao -> create (34): create Role [id=2, name=]
+25.12.2015 17:36:24 TRACE [main:] com.nixsolutions.dao.impl.JdbcRoleDao -> findByName (118): searching for role by name = 
+25.12.2015 17:36:24 TRACE [main:] com.nixsolutions.dao.impl.JdbcRoleDao -> findByRoleId (155): searching role by id = 1
+25.12.2015 17:36:24 TRACE [main:] com.nixsolutions.dao.impl.JdbcRoleDao -> remove (89): remove null
+25.12.2015 17:36:24 TRACE [main:] com.nixsolutions.dao.impl.JdbcRoleDao -> create (34): create Role [id=2, name=role2]
+25.12.2015 17:36:24 TRACE [main:] com.nixsolutions.dao.impl.JdbcRoleDao -> update (61): update Role [id=2, name=]
+25.12.2015 17:36:24 TRACE [main:] com.nixsolutions.dao.impl.JdbcRoleDao -> remove (89): remove Role [id=null, name=role1]
+25.12.2015 17:36:24 TRACE [main:] com.nixsolutions.dao.impl.JdbcRoleDao -> remove (89): remove Role [id=2, name=role2]
+25.12.2015 17:36:24 TRACE [main:] com.nixsolutions.dao.impl.JdbcRoleDao -> update (61): update Role [id=3, name=role55]
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcUserDao -> findByLogin (168): find user by login = null
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcUserDao -> update (75): update null
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcUserDao -> create (42): create null
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcUserDao -> findAll (138): find all users
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcRoleDao -> findByRoleId (155): searching role by id = 1
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcRoleDao -> findByRoleId (155): searching role by id = 2
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcRoleDao -> findByRoleId (155): searching role by id = 3
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcUserDao -> create (42): create User [id=1, login=login1, password=, email=null, firstName=firstName1, lastName=lastName1, birthDay=Thu Nov 15 00:00:00 EEST 1990, role=Role [id=1, name=role1]]
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcUserDao -> create (42): create User [id=1, login=login1, password=pass1, email=email1, firstName=firstName1, lastName=lastName1, birthDay=Thu Nov 15 00:00:00 EEST 1990, role=Role [id=1, name=]]
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcUserDao -> findByEmail (207): find user by email = email1
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcRoleDao -> findByRoleId (155): searching role by id = 1
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcUserDao -> findByLogin (168): find user by login = login2
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcRoleDao -> findByRoleId (155): searching role by id = 2
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcUserDao -> remove (109): remove null
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcUserDao -> findByLogin (168): find user by login = 
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcUserDao -> findByEmail (207): find user by email = 
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcUserDao -> create (42): create User [id=2, login=login2, password=pass2, email=email2, firstName=firstName2, lastName=lastName2, birthDay=Tue Sep 05 00:00:00 EEST 1995, role=Role [id=2, name=role2]]
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcUserDao -> update (75): update User [id=1, login=login1, password=, email=null, firstName=firstName1, lastName=lastName1, birthDay=Thu Nov 15 00:00:00 EEST 1990, role=Role [id=1, name=role1]]
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcUserDao -> update (75): update User [id=1, login=login1, password=pass1, email=email1, firstName=firstName1, lastName=lastName1, birthDay=Thu Nov 15 00:00:00 EEST 1990, role=Role [id=1, name=]]
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcUserDao -> remove (109): remove User [id=null, login=login3, password=pass3, email=email3, firstName=firstName3, lastName=lastName3, birthDay=Mon Dec 18 00:00:00 EET 1989, role=Role [id=3, name=role3]]
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcUserDao -> findByEmail (207): find user by email = null
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcUserDao -> remove (109): remove User [id=3, login=login3, password=pass3, email=email3, firstName=firstName3, lastName=lastName3, birthDay=Mon Dec 18 00:00:00 EET 1989, role=Role [id=3, name=role3]]
+25.12.2015 17:36:25 TRACE [main:] com.nixsolutions.dao.impl.JdbcUserDao -> update (75): update User [id=1, login=login55, password=pass55, email=email55, firstName=firstName55, lastName=lastName55, birthDay=Tue Mar 07 00:00:00 EET 1950, role=Role [id=3, name=role3]]

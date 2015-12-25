@@ -19,8 +19,8 @@ import com.nixsolutions.entity.User;
 import com.nixsolutions.utils.DbTestHelper;
 
 public class JdbcUserDaoTest {
-    private static final String DATASET_COMMON = "resources/dataset/user/common.xml";
-    private static final String TABLE_EMPTY = "resources/dataset/user/empty.xml";
+    private static final String DATASET_COMMON = "dataset/user/common.xml";
+    private static final String TABLE_EMPTY = "dataset/user/empty.xml";
     private static final String TABLE_NAME = "USER";
     private static final String[] IGNORE_COLS = { "USER_ID" };
     private UserDao userDao;
@@ -127,7 +127,7 @@ public class JdbcUserDaoTest {
     public void testCreate() throws Exception {
         dbTestHelper.fill(TABLE_EMPTY);
 
-        String afterCreate = "resources/dataset/user/afterCreate.xml";
+        String afterCreate = "dataset/user/afterCreate.xml";
 
         userDao.create(users[1]);
 
@@ -164,7 +164,7 @@ public class JdbcUserDaoTest {
 
     @Test
     public void testUpdate() throws Exception {
-        String afterUpdate = "resources/dataset/user/afterUpdate.xml";
+        String afterUpdate = "dataset/user/afterUpdate.xml";
 
         User user = new User();
 
@@ -208,7 +208,7 @@ public class JdbcUserDaoTest {
 
     @Test
     public void testRemove() throws Exception {
-        String afterRemove = "resources/dataset/user/afterRemove.xml";
+        String afterRemove = "dataset/user/afterRemove.xml";
 
         userDao.remove(users[2]);
 

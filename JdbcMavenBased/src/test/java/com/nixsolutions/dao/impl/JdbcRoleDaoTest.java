@@ -13,8 +13,8 @@ import com.nixsolutions.entity.Role;
 import com.nixsolutions.utils.DbTestHelper;
 
 public class JdbcRoleDaoTest {
-    private static final String DATASET_COMMON = "resources/dataset/role/common.xml";
-    private static final String TABLE_EMPTY = "resources/dataset/role/empty.xml";
+    private static final String DATASET_COMMON = "dataset/role/common.xml";
+    private static final String TABLE_EMPTY = "dataset/role/empty.xml";
     private static final String TABLE_NAME = "ROLE";
     private static final String[] IGNORE_COLS = { "ROLE_ID" };
     private RoleDao roleDao;
@@ -67,7 +67,7 @@ public class JdbcRoleDaoTest {
     @Test
     public void testCreate() throws Exception {
         dbTestHelper.fill(TABLE_EMPTY);
-        String afterCreate = "resources/dataset/role/afterCreate.xml";
+        String afterCreate = "dataset/role/afterCreate.xml";
 
         roleDao.create(roles[1]);
 
@@ -92,7 +92,7 @@ public class JdbcRoleDaoTest {
 
     @Test
     public void testUpdate() throws Exception {
-        String afterUpdate = "resources/dataset/role/afterUpdate.xml";
+        String afterUpdate = "dataset/role/afterUpdate.xml";
         Role role = roles[2];
         role.setName("role55");
 
@@ -118,7 +118,7 @@ public class JdbcRoleDaoTest {
     
     @Test
     public void testRemove() throws Exception {
-        String afterRemove = "resources/dataset/role/afterRemove.xml";
+        String afterRemove = "dataset/role/afterRemove.xml";
         
         roleDao.remove(roles[1]);
         
